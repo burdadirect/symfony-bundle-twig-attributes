@@ -13,7 +13,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```bash
-$ composer require burdanews/ symfony-bundle-twig-attributes 
+$ composer require burdanews/symfony-bundle-twig-attributes 
 ```
 
 This command requires you to have Composer installed globally, as explained
@@ -34,8 +34,6 @@ hbm_twig_attributes:
 
 ## Usage
 
-### Attributes
-
 ```twig
 {% set attributes = attributes({'class': ['class1', 'class2']}) %}
 {% set attributes = attributes.set('placeholder', 'This is a placeholder').set('type', 'text') %}
@@ -46,7 +44,13 @@ hbm_twig_attributes:
 {% set placeholder = attributes.get('placeholder') %}
 ```
 
-### Shorthand
+```twig
+<a {{ attributes() }} />
+
+<div {{ attributes().id('this-is-an-id') }}>Lore ipsum...</div>
+```
+
+#### Shorthand
 
 Available for:
 - title
@@ -63,9 +67,3 @@ Available for:
 {% set attributes = attributes.href('https://www.burda.com', '_blank') %}
 ```
 
-### Usage
-```twig
-<a {{ attributes() }} />
-
-<div {{ attributes().id('this-is-an-id') }}>Lore ipsum...</div>
-```
