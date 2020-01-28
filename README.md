@@ -50,7 +50,7 @@ hbm_twig_attributes:
 <div {{ attributes().id('this-is-an-id') }}>Lore ipsum...</div>
 ```
 
-#### Shorthand
+### Shorthand
 
 Available for:
 - title
