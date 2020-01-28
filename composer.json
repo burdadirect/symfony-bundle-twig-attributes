@@ -1,0 +1,27 @@
+{
+  "name": "burdanews/symfony-bundle-twig-attributes",
+  "description": "HBM Twig Attributes Bundle - HTML attributes helper for twig.",
+  "authors" : [{
+    "name" : "Christian Puchinger",
+    "email" : "christian.puchinger@burda.com"
+  }],
+  "license": "MIT",
+  "type": "symfony-bundle",
+  "autoload": {
+    "psr-0": {
+      "HBM\\TwigAttributesBundle": ""
+    }
+  },
+  "require": {
+    "php": ">=7.3",
+    "ext-json": "*",
+    "symfony/config": "^4.4",
+    "symfony/dependency-injection": "^4.4",
+    "symfony/twig-bundle": "^4.4"
+
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
+  "target-dir": "HBM/TwigAttributesBundle"
+}

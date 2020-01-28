@@ -1,0 +1,11 @@
+parameters:
+
+services:
+    _defaults:
+        public: true
+
+    # TWIG
+    hbm.twig_attributes:
+        class: HBM\TwigAttributesBundle\Twig\AttributesExtension
+        tags:
+            - { name: twig.extension }
