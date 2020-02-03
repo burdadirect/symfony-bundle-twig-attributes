@@ -19,6 +19,12 @@ class Configuration implements ConfigurationInterface
   {
     $treeBuilder = new TreeBuilder('hbm_twig_attributes');
 
+    if (method_exists($treeBuilder, 'getRootNode')) {
+      $rootNode = $treeBuilder->getRootNode();
+    } else {
+      $rootNode = $treeBuilder->root('hbm_twig_attributes');
+    }
+
     return $treeBuilder;
   }
 
