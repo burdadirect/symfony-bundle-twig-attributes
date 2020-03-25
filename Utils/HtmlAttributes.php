@@ -220,6 +220,10 @@ class HtmlAttributes {
     return $this;
   }
 
+  public function hasClass($class) : bool {
+    return in_array($class, $this->classes, TRUE);
+  }
+
   /****************************************************************************/
 
   public function __toString() {
