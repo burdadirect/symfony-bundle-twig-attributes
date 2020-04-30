@@ -215,7 +215,7 @@ class HtmlAttributes {
     $classes = array_merge($this->classes, $classes);
     $classes = array_unique($classes);
 
-    $this->classes = $classes;
+    $this->classes = array_diff($classes, ['']);
 
     return $this;
   }
@@ -230,7 +230,7 @@ class HtmlAttributes {
     try {
       $attributes = [];
       if (count($this->classes) > 0) {
-        $attributes[] = 'class="'.implode(' ', array_diff($this->classes, [''])).'"';
+        $attributes[] = 'class="'.implode(' ', $this->classes).'"';
       }
 
       foreach ($this->attributes as $key => $value) {

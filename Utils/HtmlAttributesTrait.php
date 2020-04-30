@@ -41,6 +41,21 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
+  public function src() {
+    if (func_num_args() === 0) {
+      return $this->getAttributesObject()->get('src');
+    }
+
+    if (func_num_args() === 1) {
+      $this->getAttributesObject()->set('src', func_get_arg(0));
+    } elseif (func_num_args() === 2) {
+      $this->getAttributesObject()->set('src', func_get_arg(0));
+      $this->getAttributesObject()->set('srcset', func_get_arg(0).' 1x, '.func_get_arg(1).' 2x');
+    }
+
+    return $this;
+  }
+
   public function title() {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('title');
