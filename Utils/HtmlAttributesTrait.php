@@ -76,6 +76,13 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
+  public function altTitle() {
+    $this->getAttributesObject()->set('alt', func_get_arg(0));
+    $this->getAttributesObject()->set('title', func_get_arg(0));
+
+    return $this;
+  }
+
   public function target() {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('target');
