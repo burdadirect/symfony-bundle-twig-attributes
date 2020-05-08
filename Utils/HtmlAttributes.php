@@ -8,7 +8,7 @@ class HtmlAttributes {
 
   use HtmlAttributesTrait;
 
-  private static $standalone = [
+  protected static $standalone = [
     'selected', 'checked', 'disabled', 'readonly', 'multiple',
     'noresize', 'compact', 'ismap', 'nowrap', 'declare', 'defer', 'noshade'
   ];
@@ -16,12 +16,12 @@ class HtmlAttributes {
   /**
    * @var string[]
    */
-  private $classes = [];
+  protected $classes = [];
 
   /**
    * @var array
    */
-  private $attributes = [];
+  protected $attributes = [];
 
   /**
    * HtmlAttributes constructor.
@@ -43,7 +43,7 @@ class HtmlAttributes {
    *
    * @return self
    */
-  public function copy() : self {
+  public function copy() {
     $copy = new HtmlAttributes();
     $copy->setClasses($this->getClasses());
     $copy->setAttributes($this->getAttributes());
