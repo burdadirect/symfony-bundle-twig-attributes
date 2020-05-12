@@ -61,7 +61,11 @@ trait HtmlAttributesTrait {
       return $this->getAttributesObject()->get('title');
     }
 
-    $this->getAttributesObject()->set('title', func_get_arg(0));
+    if ((func_num_args() === 2) && func_get_arg(1)) {
+      $this->getAttributesObject()->setIfEmpty('title', func_get_arg(0));
+    } else {
+      $this->getAttributesObject()->set('title', func_get_arg(0));
+    }
 
     return $this;
   }
