@@ -2,8 +2,6 @@
 
 namespace HBM\TwigAttributesBundle\Utils;
 
-use Exception;
-
 trait HtmlTagTrait {
 
   protected static $selfClosing = [

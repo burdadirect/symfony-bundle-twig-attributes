@@ -2,8 +2,6 @@
 
 namespace HBM\TwigAttributesBundle\Utils;
 
-use Exception;
-
 class HtmlTag extends HtmlAttributes {
 
   use HtmlTagTrait;
