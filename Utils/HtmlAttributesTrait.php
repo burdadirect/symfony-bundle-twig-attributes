@@ -17,6 +17,12 @@ trait HtmlAttributesTrait {
       if (func_get_arg(1) === TRUE) {
         $this->getAttributesObject()->addClasses(func_get_arg(0));
       }
+    } elseif ((func_num_args() === 3) && is_bool(func_get_arg(1))) {
+      if (func_get_arg(1) === TRUE) {
+        $this->getAttributesObject()->addClasses(func_get_arg(0));
+      } else {
+        $this->getAttributesObject()->addClasses(func_get_arg(2));
+      }
     } else {
       foreach (func_get_args() as $classes) {
         $this->getAttributesObject()->addClasses($classes);
