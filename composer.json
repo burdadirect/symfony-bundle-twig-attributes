@@ -1,5 +1,5 @@
 {
-  "name": "burdanews/symfony-bundle-twig-attributes",
+  "name": "burdadirect/symfony-bundle-twig-attributes",
   "description": "HBM Twig Attributes Bundle - HTML attributes helper for twig.",
   "authors" : [{
     "name" : "Christian Puchinger",
