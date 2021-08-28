@@ -62,9 +62,8 @@ trait HtmlTagTrait {
   public function open() : string {
     if (in_array($this->getTag(), self::$selfClosing, TRUE)) {
       return '<'.$this->getTag().' '.$this->renderAttributes().' />';
-    } else {
-      return '<'.$this->getTag().' '.$this->renderAttributes().'>';
     }
+    return '<'.$this->getTag().' '.$this->renderAttributes().'>';
   }
 
   /**
@@ -73,9 +72,8 @@ trait HtmlTagTrait {
   public function close() : ?string {
     if (in_array($this->getTag(), self::$selfClosing, TRUE)) {
       return NULL;
-    } else {
-      return '</'.$this->getTag().'>';
     }
+    return '</'.$this->getTag().'>';
   }
 
   /**
@@ -84,9 +82,8 @@ trait HtmlTagTrait {
   public function __toString() {
     if (in_array($this->getTag(), self::$selfClosing, TRUE)) {
       return '<'.$this->getTag().' '.$this->renderAttributes().' />';
-    } else {
-      return '<'.$this->getTag().' '.$this->renderAttributes().'></'.$this->getTag().'>';
     }
+    return '<'.$this->getTag().' '.$this->renderAttributes().'></'.$this->getTag().'>';
   }
 
 }

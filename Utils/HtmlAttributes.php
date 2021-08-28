@@ -126,14 +126,17 @@ class HtmlAttributes {
    *
    * @param $key
    * @param $value
+   * @param bool $condition
    *
    * @return self
    */
-  public function set($key, $value) : self {
-    if ($key === 'class') {
-      $this->addClasses($value);
-    } else {
-      $this->attributes[$key] = $value;
+  public function set($key, $value, $condition = TRUE) : self {
+    if ($condition) {
+      if ($key === 'class') {
+        $this->addClasses($value);
+      } else {
+        $this->attributes[$key] = $value;
+      }
     }
 
     return $this;
@@ -226,24 +229,34 @@ class HtmlAttributes {
 
   /****************************************************************************/
 
+  public function toArray() : array {
+    $all = [];
+
+    if (count($this->classes) > 0) {
+      $all['class'] = implode(' ', $this->classes);
+    }
+
+    foreach ($this->attributes as $key => $value) {
+      if (in_array($key, self::$standalone, TRUE)) {
+        if ($value) {
+          $all[$key] = $key;
+        }
+      } else {
+        $all[$key] = str_replace('"', '&quot;', $value);
+      }
+    }
+
+    return $all;
+  }
+
   public function __toString() {
     try {
-      $attributes = [];
-      if (count($this->classes) > 0) {
-        $attributes[] = 'class="'.implode(' ', $this->classes).'"';
+      $parts = [];
+      foreach ($this->toArray() as $key => $value) {
+        $parts[] = $key.'="'.$value.'"';
       }
 
-      foreach ($this->attributes as $key => $value) {
-        if (in_array($key, self::$standalone, TRUE)) {
-          if ($value) {
-            $attributes[] = $key.'="'.$key.'"';
-          }
-        } else {
-          $attributes[] = $key.'="'.str_replace('"', '&quot;', $value).'"';
-        }
-      }
-
-      return implode(' ', $attributes);
+      return implode(' ', $parts);
     } catch (Exception $e) {
       return 'data-exception="'.htmlentities(json_encode($this->attributes), ENT_COMPAT).'"';
     }
