@@ -223,6 +223,19 @@ class HtmlAttributes {
     return $this;
   }
 
+  public function removeClasses($classes) : self {
+    if (!is_array($classes)) {
+      $classes = explode(' ', $classes);
+    }
+
+    $classes = array_map('trim', $classes);
+    $classes = array_unique($classes);
+
+    $this->classes = array_diff($this->classes, $classes, ['']);
+
+    return $this;
+  }
+
   public function hasClass($class) : bool {
     return in_array($class, $this->classes, TRUE);
   }

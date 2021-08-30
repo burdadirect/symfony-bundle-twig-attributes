@@ -17,7 +17,7 @@ trait HtmlTagTrait {
   /**
    * Set tag.
    *
-   * @param string $tag
+   * @param string|null $tag
    *
    * @return self
    */
