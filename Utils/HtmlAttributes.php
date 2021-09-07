@@ -255,7 +255,7 @@ class HtmlAttributes {
           $all[$key] = $key;
         }
       } else {
-        $all[$key] = str_replace('"', '&quot;', $value);
+        $all[$key] = $value;
       }
     }
 
@@ -266,7 +266,7 @@ class HtmlAttributes {
     try {
       $parts = [];
       foreach ($this->toArray() as $key => $value) {
-        $parts[] = $key.'="'.$value.'"';
+        $parts[] = $key.'="'.str_replace('"', '&quot;', $value).'"';
       }
 
       return implode(' ', $parts);
