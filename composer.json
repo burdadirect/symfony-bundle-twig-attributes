@@ -13,7 +13,7 @@
     }
   },
   "require": {
-    "php": ">=7.3",
+    "php": "^7.4.0",
     "ext-json": "*",
     "symfony/config": "^4.4|^5.2",
     "symfony/dependency-injection": "^4.4|^5.2",
@@ -21,6 +21,6 @@
 
   },
   "require-dev": {
-    "roave/security-advisories": "dev-master"
+    "roave/security-advisories": "dev-latest"
   }
 }
