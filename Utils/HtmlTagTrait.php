@@ -4,15 +4,14 @@ namespace HBM\TwigAttributesBundle\Utils;
 
 trait HtmlTagTrait {
 
-  protected static $selfClosing = [
+  protected static array $selfClosing = [
     'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
     'link', 'meta', 'param', 'source', 'track', 'wbr'
   ];
 
-  /**
-   * @var string|null
-   */
-  protected $tag;
+  protected ?string $tag;
+
+  protected array $contents = [];
 
   /**
    * Set tag.
@@ -52,6 +51,57 @@ trait HtmlTagTrait {
   /****************************************************************************/
 
   /**
+   * Set content.
+   *
+   * @param array|string|HtmlTag $contents
+   *
+   * @return self
+   */
+  public function setContent($contents) : self {
+    $this->contents = [];
+    $this->addContent($contents);
+
+    return $this;
+  }
+
+  public function addContent($contents) :self {
+    if (!is_array($contents)) {
+      $contents = [$contents];
+    }
+    foreach ($contents as $content) {
+      if (($content !== null) && ($content !== '')) {
+        $this->contents[] = $content;
+      }
+    }
+
+    return $this;
+  }
+
+  /**
+   * Get contents.
+   *
+   * @return array
+   */
+  public function getContent() : array {
+    return $this->contents;
+  }
+
+  /**
+   * @return $this|array
+   */
+  public function content() {
+    if (func_num_args() === 0) {
+      return $this->getContent();
+    }
+
+    $this->addContent(func_get_arg(0));
+
+    return $this;
+  }
+
+  /****************************************************************************/
+
+  /**
    * @return string
    */
   abstract protected function renderAttributes() : string;
@@ -83,7 +133,7 @@ trait HtmlTagTrait {
     if (in_array($this->getTag(), self::$selfClosing, TRUE)) {
       return '<'.$this->getTag().' '.$this->renderAttributes().' />';
     }
-    return '<'.$this->getTag().' '.$this->renderAttributes().'></'.$this->getTag().'>';
+    return '<'.$this->getTag().' '.$this->renderAttributes().'>'.implode('', $this->getContent()).'</'.$this->getTag().'>';
   }
 
 }

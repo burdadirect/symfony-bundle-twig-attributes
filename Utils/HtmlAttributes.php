@@ -8,26 +8,20 @@ class HtmlAttributes {
 
   use HtmlAttributesTrait;
 
-  protected static $standalone = [
+  protected static array $standalone = [
     'selected', 'checked', 'disabled', 'readonly', 'multiple',
     'noresize', 'compact', 'ismap', 'nowrap', 'declare', 'defer', 'noshade'
   ];
 
-  /**
-   * @var string[]
-   */
-  protected $classes = [];
+  protected array $classes = [];
 
-  /**
-   * @var array
-   */
-  protected $attributes = [];
+  protected array $attributes = [];
 
   /**
    * HtmlAttributes constructor.
    *
    * @param mixed $attributes
-   * @param bool $onlyIfNotEmpty
+   * @param bool|mixed $onlyIfNotEmpty
    */
   public function __construct($attributes = NULL, $onlyIfNotEmpty = FALSE) {
     if ($attributes instanceof self) {
@@ -43,7 +37,7 @@ class HtmlAttributes {
    *
    * @return self
    */
-  public function copy() {
+  public function copy(): HtmlAttributes {
     $copy = new HtmlAttributes();
     $copy->setClasses($this->getClasses());
     $copy->setAttributes($this->getAttributes());
@@ -58,7 +52,7 @@ class HtmlAttributes {
    *
    * @return self
    */
-  public function setClasses($classes) : self {
+  public function setClasses(array $classes) : self {
     $this->classes = $classes;
 
     return $this;
@@ -76,7 +70,7 @@ class HtmlAttributes {
    *
    * @return self
    */
-  public function setAttributes($attributes) : self {
+  public function setAttributes(array $attributes) : self {
     $this->attributes = $attributes;
 
     return $this;
@@ -105,7 +99,7 @@ class HtmlAttributes {
    * Sets multiple html attributes.
    *
    * @param mixed $attributes
-   * @param bool $onlyIfNotEmpty
+   * @param bool|mixed $onlyIfNotEmpty
    *
    * @return self
    */
@@ -126,7 +120,7 @@ class HtmlAttributes {
    *
    * @param $key
    * @param $value
-   * @param bool $condition
+   * @param bool|mixed $condition
    *
    * @return self
    */

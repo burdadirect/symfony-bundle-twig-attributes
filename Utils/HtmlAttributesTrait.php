@@ -4,7 +4,7 @@ namespace HBM\TwigAttributesBundle\Utils;
 
 trait HtmlAttributesTrait {
 
-  public function getAttributesObject() {
+  public function getAttributesObject(): HtmlAttributes {
     return $this;
   }
 
