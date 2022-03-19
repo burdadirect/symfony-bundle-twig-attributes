@@ -118,13 +118,13 @@ class HtmlAttributes {
   /**
    * Sets an html attribute.
    *
-   * @param $key
-   * @param $value
+   * @param string $key
+   * @param mixed|null $value
    * @param bool|mixed $condition
    *
    * @return self
    */
-  public function set($key, $value, $condition = TRUE) : self {
+  public function set(string $key, $value = null, $condition = TRUE) : self {
     if ($condition) {
       if ($key === 'class') {
         $this->addClasses($value);
@@ -260,7 +260,13 @@ class HtmlAttributes {
     try {
       $parts = [];
       foreach ($this->toArray() as $key => $value) {
-        $parts[] = $key.'="'.str_replace('"', '&quot;', $value).'"';
+        if ($value === null) {
+          $parts[] = $key;
+        } elseif (is_bool($value)) {
+          $parts[] = $key.'="'.($value ? 'true': 'false').'"';
+        } else {
+          $parts[] = $key.'="'.str_replace('"', '&quot;', $value).'"';
+        }
       }
 
       return implode(' ', $parts);

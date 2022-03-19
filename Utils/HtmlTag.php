@@ -34,6 +34,27 @@ class HtmlTag extends HtmlAttributes {
   }
 
   /**
+   * Should be placed here to not interfere with the "attr" method when the trait
+   * is used in BootstramItem.
+   *
+   * @return HtmlTag|HtmlAttributes|mixed|string[]|null
+   */
+  public function attr() {
+    if (func_num_args() === 0) {
+      return $this->getAttributesObject();
+    }
+    if (func_num_args() === 1) {
+      return $this->get(func_get_arg(0));
+    }
+    if (func_num_args() === 2) {
+      return $this->set(func_get_arg(0), func_get_arg(1));
+    }
+
+    return $this;
+  }
+
+
+  /**
    * @return string
    */
   protected function renderAttributes() : string {
