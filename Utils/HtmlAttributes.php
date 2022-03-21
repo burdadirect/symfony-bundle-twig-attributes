@@ -20,7 +20,7 @@ class HtmlAttributes {
   /**
    * HtmlAttributes constructor.
    *
-   * @param mixed $attributes
+   * @param HtmlAttributes|string|array|null $attributes
    * @param bool|mixed $onlyIfNotEmpty
    */
   public function __construct($attributes = NULL, $onlyIfNotEmpty = FALSE) {
@@ -29,6 +29,8 @@ class HtmlAttributes {
       $this->attributes = $attributes->getAttributes();
     } elseif (is_array($attributes)) {
       $this->add($attributes, $onlyIfNotEmpty);
+    } elseif (is_string($attributes)) {
+      $this->add($this->parseString($attributes), $onlyIfNotEmpty);
     }
   }
 
@@ -98,7 +100,7 @@ class HtmlAttributes {
   /**
    * Sets multiple html attributes.
    *
-   * @param mixed $attributes
+   * @param HtmlAttributes|string|array|null $attributes
    * @param bool|mixed $onlyIfNotEmpty
    *
    * @return self
@@ -110,6 +112,11 @@ class HtmlAttributes {
           $this->set($key, $value);
         }
       }
+    } elseif (is_string($attributes)) {
+      $this->add($this->parseString($attributes), $onlyIfNotEmpty);
+    } elseif ($attributes instanceof self) {
+      $this->add($attributes->getAttributes());
+      $this->addClasses($attributes->getClasses());
     }
 
     return $this;
@@ -254,6 +261,19 @@ class HtmlAttributes {
     }
 
     return $all;
+  }
+
+  /**
+   * @param string $attributesString
+   *
+   * @return array
+   */
+  private function parseString(string $attributesString): array {
+    if (preg_match_all('/\s?(.*?)="(.*?)"\s?/', $attributesString, $matches)) {
+      return array_combine($matches[1], $matches[2]);
+    }
+
+    return [];
   }
 
   public function __toString() {
