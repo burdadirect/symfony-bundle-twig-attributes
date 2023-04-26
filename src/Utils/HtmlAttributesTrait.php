@@ -4,11 +4,17 @@ namespace HBM\TwigAttributesBundle\Utils;
 
 trait HtmlAttributesTrait {
 
+  /**
+   * @return HtmlAttributes
+   */
   public function getAttributesObject(): HtmlAttributes {
     return $this;
   }
 
-  public function class() {
+  /**
+   * @return array|static
+   */
+  public function class(): array|static {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->getClasses();
     }
@@ -32,7 +38,10 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function href() {
+  /**
+   * @return string|static|null
+   */
+  public function href(): string|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('href');
     }
@@ -47,7 +56,10 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function src() {
+  /**
+   * @return string|static|null
+   */
+  public function src(): string|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('src');
     }
@@ -62,7 +74,10 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function title() {
+  /**
+   * @return string|static|null
+   */
+  public function title(): string|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('title');
     }
@@ -76,7 +91,10 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function alt() {
+  /**
+   * @return string|static|null
+   */
+  public function alt(): string|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('alt');
     }
@@ -86,14 +104,20 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function altTitle() {
+  /**
+   * @return static
+   */
+  public function altTitle(): static  {
     $this->getAttributesObject()->set('alt', func_get_arg(0));
     $this->getAttributesObject()->set('title', func_get_arg(0));
 
     return $this;
   }
 
-  public function target() {
+  /**
+   * @return string|static|null
+   */
+  public function target(): string|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('target');
     }
@@ -103,7 +127,10 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function onclick() {
+  /**
+   * @return string|static|null
+   */
+  public function onclick(): string|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('onclick');
     }
@@ -113,7 +140,10 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function id() {
+  /**
+   * @return string|static|null
+   */
+  public function id(): string|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('id');
     }
@@ -123,7 +153,10 @@ trait HtmlAttributesTrait {
     return $this;
   }
 
-  public function disabled() {
+  /**
+   * @return string|bool|static|null
+   */
+  public function disabled(): string|bool|static|null {
     if (func_num_args() === 0) {
       return $this->getAttributesObject()->get('disabled');
     }

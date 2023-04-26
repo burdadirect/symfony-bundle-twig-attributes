@@ -18,9 +18,9 @@ trait HtmlTagTrait {
    *
    * @param string|null $tag
    *
-   * @return self
+   * @return static
    */
-  public function setTag(string $tag = NULL) : self {
+  public function setTag(string $tag = NULL) : static {
     $this->tag = $tag;
 
     return $this;
@@ -36,9 +36,9 @@ trait HtmlTagTrait {
   }
 
   /**
-   * @return $this|string|null
+   * @return static|string|null
    */
-  public function tag() {
+  public function tag(): static|string|null {
     if (func_num_args() === 0) {
       return $this->getTag();
     }
@@ -55,16 +55,21 @@ trait HtmlTagTrait {
    *
    * @param array|string|HtmlTag $contents
    *
-   * @return self
+   * @return static
    */
-  public function setContent($contents) : self {
+  public function setContent(array|string|HtmlTag $contents) : static {
     $this->contents = [];
     $this->addContent($contents);
 
     return $this;
   }
 
-  public function addContent($contents) :self {
+  /**
+   * @param mixed $contents
+   *
+   * @return static
+   */
+  public function addContent(mixed $contents) : static {
     if (!is_array($contents)) {
       $contents = [$contents];
     }
@@ -87,9 +92,9 @@ trait HtmlTagTrait {
   }
 
   /**
-   * @return $this|array
+   * @return static|array
    */
-  public function content() {
+  public function content(): array|static {
     if (func_num_args() === 0) {
       return $this->getContent();
     }
@@ -129,7 +134,7 @@ trait HtmlTagTrait {
   /**
    * @return string
    */
-  public function __toString() {
+  public function __toString(): string {
     if (in_array($this->getTag(), self::$selfClosing, TRUE)) {
       return '<'.$this->getTag().' '.$this->renderAttributes().' />';
     }

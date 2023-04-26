@@ -20,10 +20,10 @@ class HtmlAttributes {
   /**
    * HtmlAttributes constructor.
    *
-   * @param HtmlAttributes|string|array|null $attributes
-   * @param bool|mixed $onlyIfNotEmpty
+   * @param HtmlAttributes|array|string|null $attributes
+   * @param mixed $onlyIfNotEmpty
    */
-  public function __construct($attributes = NULL, $onlyIfNotEmpty = FALSE) {
+  public function __construct(HtmlAttributes|array|string|null $attributes = NULL, mixed $onlyIfNotEmpty = FALSE) {
     if ($attributes instanceof self) {
       $this->classes = $attributes->getClasses();
       $this->attributes = $attributes->getAttributes();
@@ -52,9 +52,9 @@ class HtmlAttributes {
   /**
    * @param string[] $classes
    *
-   * @return self
+   * @return static
    */
-  public function setClasses(array $classes) : self {
+  public function setClasses(array $classes) : static {
     $this->classes = $classes;
 
     return $this;
@@ -70,9 +70,9 @@ class HtmlAttributes {
   /**
    * @param string[] $attributes
    *
-   * @return self
+   * @return static
    */
-  public function setAttributes(array $attributes) : self {
+  public function setAttributes(array $attributes) : static {
     $this->attributes = $attributes;
 
     return $this;
@@ -100,12 +100,12 @@ class HtmlAttributes {
   /**
    * Sets multiple html attributes.
    *
-   * @param HtmlAttributes|string|array|null $attributes
-   * @param bool|mixed $onlyIfNotEmpty
+   * @param HtmlAttributes|array|string|null $attributes
+   * @param mixed $onlyIfNotEmpty
    *
-   * @return self
+   * @return static
    */
-  public function add($attributes, $onlyIfNotEmpty = FALSE) : self {
+  public function add(HtmlAttributes|array|string|null $attributes, mixed $onlyIfNotEmpty = FALSE) : static {
     if (is_array($attributes)) {
       foreach ($attributes as $key => $value) {
         if (!$onlyIfNotEmpty || $value) {
@@ -126,12 +126,12 @@ class HtmlAttributes {
    * Sets an html attribute.
    *
    * @param string $key
-   * @param mixed|null $value
-   * @param bool|mixed $condition
+   * @param mixed $value
+   * @param mixed $condition
    *
-   * @return self
+   * @return static
    */
-  public function set(string $key, $value = null, $condition = TRUE) : self {
+  public function set(string $key, mixed $value = null, mixed $condition = TRUE) : static {
     if ($condition) {
       if ($key === 'class') {
         $this->addClasses($value);
@@ -148,9 +148,9 @@ class HtmlAttributes {
    *
    * @param array|string $keys
    *
-   * @return self
+   * @return static
    */
-  public function unset($keys) : self {
+  public function unset(array|string $keys) : static {
     if (!is_array($keys)) {
       $keys = [$keys];
     }
@@ -167,9 +167,9 @@ class HtmlAttributes {
    * @param $key
    * @param $value
    *
-   * @return self
+   * @return static
    */
-  public function setIfEmpty($key, $value) : self {
+  public function setIfEmpty($key, $value) : static {
     if (!$this->get($key)) {
       return $this->set($key, $value);
     }
@@ -178,14 +178,14 @@ class HtmlAttributes {
   }
 
   /**
-   * Sets an html attribute if the value is not null or empty.
+   * Sets a html attribute if the value is not null or empty.
    *
-   * @param $key
-   * @param $value
+   * @param string $key
+   * @param mixed $value
    *
-   * @return self
+   * @return static
    */
-  public function setIfNotEmpty($key, $value) : self {
+  public function setIfNotEmpty(string $key, mixed $value) : static {
     if ($value) {
       return $this->set($key, $value);
     }
@@ -194,13 +194,13 @@ class HtmlAttributes {
   }
 
   /**
-   * Gets an html attribute.
+   * Gets a html attribute.
    *
-   * @param $key
+   * @param string $key
    *
-   * @return mixed|null|string[]
+   * @return mixed
    */
-  public function get($key) {
+  public function get(string $key): mixed {
     if ($key === 'class') {
       return $this->classes;
     }
@@ -210,9 +210,14 @@ class HtmlAttributes {
 
   /****************************************************************************/
 
-  public function addClasses($classes) : self {
+  /**
+   * @param array|string $classes
+   *
+   * @return static
+   */
+  public function addClasses(array|string $classes) : static {
     if (!is_array($classes)) {
-      $classes = explode(' ', $classes);
+      $classes = explode(' ', $classes ?? '');
     }
 
     $classes = array_map('trim', $classes);
@@ -224,7 +229,11 @@ class HtmlAttributes {
     return $this;
   }
 
-  public function removeClasses($classes) : self {
+  /**
+   * @param array|string $classes
+   * @return static
+   */
+  public function removeClasses(array|string $classes) : static {
     if (!is_array($classes)) {
       $classes = explode(' ', $classes);
     }
@@ -237,12 +246,20 @@ class HtmlAttributes {
     return $this;
   }
 
+  /**
+   * @param $class
+   *
+   * @return bool
+   */
   public function hasClass($class) : bool {
     return in_array($class, $this->classes, TRUE);
   }
 
   /****************************************************************************/
 
+  /**
+   * @return array
+   */
   public function toArray() : array {
     $all = [];
 
@@ -276,6 +293,11 @@ class HtmlAttributes {
     return [];
   }
 
+  /**
+   * @return string
+   *
+   * @throws \JsonException
+   */
   public function __toString() {
     try {
       $parts = [];
@@ -291,7 +313,7 @@ class HtmlAttributes {
 
       return implode(' ', $parts);
     } catch (Exception $e) {
-      return 'data-exception="'.htmlentities(json_encode($this->attributes), ENT_COMPAT).'"';
+      return 'data-exception="'.htmlentities(json_encode($this->attributes, JSON_THROW_ON_ERROR), ENT_COMPAT).'"';
     }
   }
 

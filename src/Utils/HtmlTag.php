@@ -10,10 +10,10 @@ class HtmlTag extends HtmlAttributes {
    * HtmlTag constructor.
    *
    * @param string|null $tag
-   * @param mixed $attributes
-   * @param bool|mixed $onlyIfNotEmpty
+   * @param HtmlAttributes|array|string|null $attributes
+   * @param mixed $onlyIfNotEmpty
    */
-  public function __construct(string $tag = NULL, $attributes = NULL, $onlyIfNotEmpty = FALSE) {
+  public function __construct(string $tag = NULL, HtmlAttributes|array|string|null $attributes = NULL, mixed $onlyIfNotEmpty = FALSE) {
     parent::__construct($attributes, $onlyIfNotEmpty);
 
     $this->tag = $tag;
@@ -39,7 +39,7 @@ class HtmlTag extends HtmlAttributes {
    *
    * @return HtmlTag|HtmlAttributes|mixed|string[]|null
    */
-  public function attr() {
+  public function attr(): mixed {
     if (func_num_args() === 0) {
       return $this->getAttributesObject();
     }
