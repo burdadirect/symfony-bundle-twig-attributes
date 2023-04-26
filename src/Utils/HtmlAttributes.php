@@ -215,7 +215,7 @@ class HtmlAttributes {
    *
    * @return static
    */
-  public function addClasses(array|string $classes) : static {
+  public function addClasses(array|string|null $classes) : static {
     if (!is_array($classes)) {
       $classes = explode(' ', $classes ?? '');
     }
