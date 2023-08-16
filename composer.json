@@ -15,9 +15,9 @@
   "require": {
     "php": "^8.2.0",
     "ext-json": "*",
-    "symfony/config": "^5.4",
-    "symfony/dependency-injection": "^5.4",
-    "symfony/twig-bundle": "^5.4"
+    "symfony/config": "^6.3",
+    "symfony/dependency-injection": "^6.3",
+    "symfony/twig-bundle": "^6.3"
 
   },
   "require-dev": {

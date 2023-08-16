@@ -12,14 +12,14 @@ class AttributesExtension extends AbstractExtension {
 
   public function getTests() : array {
     return [
-      new TwigTest('attributes', [$this, 'isAttributes']),
+      new TwigTest('attributes', $this->isAttributes(...)),
     ];
   }
 
   public function getFunctions() : array {
     return [
-      new TwigFunction('attributes', [$this, 'attributes']),
-      new TwigFunction('tag', [$this, 'tag']),
+      new TwigFunction('attributes', $this->attributes(...)),
+      new TwigFunction('tag', $this->tag(...)),
     ];
   }
 
