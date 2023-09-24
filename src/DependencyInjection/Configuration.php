@@ -12,14 +12,14 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-  /**
-   * {@inheritdoc}
-   */
-  public function getConfigTreeBuilder(): TreeBuilder {
-    $treeBuilder = new TreeBuilder('hbm_twig_attributes');
-    $rootNode = $treeBuilder->getRootNode();
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfigTreeBuilder(): TreeBuilder
+    {
+        $treeBuilder = new TreeBuilder('hbm_twig_attributes');
+        $rootNode    = $treeBuilder->getRootNode();
 
-    return $treeBuilder;
-  }
-
+        return $treeBuilder;
+    }
 }
