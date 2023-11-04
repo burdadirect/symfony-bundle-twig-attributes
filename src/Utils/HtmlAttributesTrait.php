@@ -81,6 +81,16 @@ trait HtmlAttributesTrait
         return $this;
     }
 
+    public function titleAppend(string $title): static
+    {
+        return $this->title($this->title().$title);
+    }
+
+    public function titlePrepend(string $title): static
+    {
+        return $this->title($title.$this->title());
+    }
+
     public function alt(): string|static|null
     {
         if (func_num_args() === 0) {

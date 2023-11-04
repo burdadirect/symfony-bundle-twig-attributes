@@ -200,6 +200,11 @@ class HtmlAttributes
         return $this;
     }
 
+    public function swapClasses(array|string $removeClasses, array|string $addClasses): static
+    {
+        return $this->removeClasses($removeClasses)->addClasses($addClasses);
+    }
+
     public function hasClass($class): bool
     {
         return in_array($class, $this->classes, true);
