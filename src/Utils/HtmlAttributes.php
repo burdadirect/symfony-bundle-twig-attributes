@@ -2,7 +2,7 @@
 
 namespace HBM\TwigAttributesBundle\Utils;
 
-class HtmlAttributes
+class HtmlAttributes implements \Stringable
 {
     use HtmlAttributesTrait;
 
@@ -245,7 +245,7 @@ class HtmlAttributes
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         try {
             $parts = [];
@@ -260,7 +260,7 @@ class HtmlAttributes
             }
 
             return implode(' ', $parts);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return 'data-exception="' . htmlentities(json_encode($this->attributes, JSON_THROW_ON_ERROR), ENT_COMPAT) . '"';
         }
     }
