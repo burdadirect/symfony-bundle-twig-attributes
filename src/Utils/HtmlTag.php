@@ -9,7 +9,7 @@ class HtmlTag extends HtmlAttributes
     /**
      * HtmlTag constructor.
      */
-    public function __construct(string $tag = null, HtmlAttributes|array|string $attributes = null, mixed $onlyIfNotEmpty = false)
+    public function __construct(?string $tag = null, HtmlAttributes|array|string|null $attributes = null, mixed $onlyIfNotEmpty = false)
     {
         parent::__construct($attributes, $onlyIfNotEmpty);
 

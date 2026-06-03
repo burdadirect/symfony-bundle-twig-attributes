@@ -16,7 +16,7 @@ trait HtmlTagTrait
     /**
      * Set tag.
      */
-    public function setTag(string $tag = null): static
+    public function setTag(?string $tag = null): static
     {
         $this->tag = $tag;
 
