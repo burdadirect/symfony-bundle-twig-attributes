@@ -51,7 +51,7 @@ class AttributesExtension extends AbstractExtension
 
     /* FILTERS */
 
-    public function tagFilter(HtmlTag $tag = null): ?string {
+    public function tagFilter(?HtmlTag $tag = null): ?string {
         if ($tag === null) {
             return null;
         }
@@ -59,7 +59,7 @@ class AttributesExtension extends AbstractExtension
         return (string) $tag;
     }
 
-    public function tagNotEmptyFilter(HtmlTag $tag = null): ?string {
+    public function tagNotEmptyFilter(?HtmlTag $tag = null): ?string {
         if ($tag === null) {
             return null;
         }
@@ -73,7 +73,7 @@ class AttributesExtension extends AbstractExtension
     /**
      * Translates a html tag. Translates the title attribute by default. Add more attribute keys to translate them.
      */
-    public function transTag(HtmlTag $tag = null, array $attributeArguments = ['title' => []], string $domain = null, string $locale = null): ?HtmlTag
+    public function transTag(?HtmlTag $tag = null, array $attributeArguments = ['title' => []], ?string $domain = null, ?string $locale = null): ?HtmlTag
     {
         if ($tag === null) {
             return null;
@@ -87,7 +87,7 @@ class AttributesExtension extends AbstractExtension
     /**
      * Translates a html tag. Translates the title attribute by default. Add more attribute keys to translate them.
      */
-    public function transAttr(HtmlAttributes $attributes = null, array $attributeArguments = ['title' => []], string $domain = null, string $locale = null): ?HtmlAttributes
+    public function transAttr(?HtmlAttributes $attributes = null, array $attributeArguments = ['title' => []], ?string $domain = null, ?string $locale = null): ?HtmlAttributes
     {
         if ($attributes === null) {
             return null;
@@ -115,12 +115,12 @@ class AttributesExtension extends AbstractExtension
     /**
      * Creates an html tag object.
      */
-    public function tag(string $tag = null, HtmlAttributes|array $attributes = null): HtmlTag
+    public function tag(?string $tag = null, HtmlAttributes|array|null $attributes = null): HtmlTag
     {
         return new HtmlTag($tag, $attributes);
     }
 
-    public function tagParse(string $tagString = null, HtmlAttributes|array $attributes = null): HtmlTag
+    public function tagParse(?string $tagString = null, HtmlAttributes|array|null $attributes = null): HtmlTag
     {
       if (!$attributes instanceof HtmlAttributes) {
         $attributes = new HtmlAttributes($attributes);
