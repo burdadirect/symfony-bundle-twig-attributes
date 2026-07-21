@@ -107,7 +107,7 @@ class AttributesExtension extends AbstractExtension
     /**
      * Creates an html attribute object.
      */
-    public function attributes(HtmlAttributes|array $attributes = null): HtmlAttributes
+    public function attributes(HtmlAttributes|array|null $attributes = null): HtmlAttributes
     {
         return new HtmlAttributes($attributes);
     }
