@@ -18,7 +18,7 @@ class HtmlAttributes implements \Stringable
     /**
      * HtmlAttributes constructor.
      */
-    public function __construct(HtmlAttributes|array|string $attributes = null, mixed $onlyIfNotEmpty = false)
+    public function __construct(HtmlAttributes|array|string|null $attributes = null, mixed $onlyIfNotEmpty = false)
     {
         if ($attributes instanceof self) {
             $this->classes    = $attributes->getClasses();
