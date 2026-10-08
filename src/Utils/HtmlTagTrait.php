@@ -81,7 +81,19 @@ trait HtmlTagTrait
             return $this->getContent();
         }
 
-        $this->addContent(func_get_arg(0));
+        if ((func_num_args() === 2) && is_bool(func_get_arg(1))) {
+            if (func_get_arg(1) === true) {
+                $this->addContent(func_get_arg(0));
+            }
+        } elseif ((func_num_args() === 3) && is_bool(func_get_arg(1))) {
+            if (func_get_arg(1) === true) {
+                $this->addContent(func_get_arg(0));
+            } else {
+                $this->addContent(func_get_arg(2));
+            }
+        } else {
+            $this->addContent(func_get_arg(0));
+        }
 
         return $this;
     }
