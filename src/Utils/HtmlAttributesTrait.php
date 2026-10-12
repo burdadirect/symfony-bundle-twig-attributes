@@ -81,14 +81,22 @@ trait HtmlAttributesTrait
         return $this;
     }
 
-    public function titleAppend(string $title): static
+    public function titleAppend(string $title, mixed $flag = true): static
     {
-        return $this->title($this->title().$title);
+        if ($flag) {
+            return $this->title($this->title().$title);
+        }
+
+        return $this;
     }
 
-    public function titlePrepend(string $title): static
+    public function titlePrepend(string $title, mixed $flag = true): static
     {
-        return $this->title($title.$this->title());
+        if ($flag) {
+            return $this->title($title.$this->title());
+        }
+
+        return $this;
     }
 
     public function alt(): string|static|null
